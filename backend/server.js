@@ -16,8 +16,8 @@ const emailConfig = {
   port: 587,
   secure: false,
   auth: {
-    user: your-email',
-    pass: 'your-app-password',
+    user: bagchineil518@gmail.com',
+    pass: 'vyyq qbgl ckat gttp',
   },
 };
 
