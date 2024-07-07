@@ -1,10 +1,13 @@
 {
+  "homepage": "http://neilbag.github.io/google-search-results-app",
   "name": "automated-google-search-webapp",
   "version": "1.0.0",
   "description": "A web application that automates Google searches and sends results via email",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
   },
   "dependencies": {
     "express": "^4.17.1",
