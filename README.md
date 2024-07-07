@@ -1,6 +1,6 @@
 # Automated Google Search Web App
 
-This web application automates Google searches and sends the results via email. It's built using Node.js, Express, and uses Puppeteer for web scraping.
+This web application automates Google searches and sends the results via email. It's built using Node.js, and Express, and uses Puppeteer for web scraping.
 
 ## Features
 
@@ -8,6 +8,7 @@ This web application automates Google searches and sends the results via email. 
 - Scrape search results
 - Send search results via email
 - User-friendly web interface
+- download search results on an Excel
 
 ## Prerequisites
 
