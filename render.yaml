@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: automated-google-search
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 14.17.0
