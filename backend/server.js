@@ -4,6 +4,7 @@ const cheerio = require('cheerio');
 const nodemailer = require('nodemailer');
 const XLSX = require('xlsx');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -116,10 +117,10 @@ async function sendEmail(results, recipientEmail, searchQuery) {
   await transporter.sendMail(mailOptions);
 }
 
-app.get('/', (req, res) => {
-  res.send('Server is up and running.');
-});
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'build')));
 
+// API routes
 app.post('/api/search', async (req, res) => {
   try {
     const { searchQuery } = req.body;
@@ -150,6 +151,12 @@ app.post('/api/email', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while sending the email.' });
   }
+});
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.listen(PORT, () => {
