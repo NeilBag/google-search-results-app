@@ -156,7 +156,7 @@ app.post('/api/email', async (req, res) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'frontend/public', 'index.html'));
 });
 
 app.listen(PORT, () => {
