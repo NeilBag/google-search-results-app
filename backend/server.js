@@ -147,7 +147,10 @@ app.post('/api/email', async (req, res) => {
     res.status(500).json({ error: 'An error occurred while sending the email.' });
   }
 });
-
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
 // Server setup
 const PORT = process.env.PORT || 3000;
 
@@ -171,3 +174,4 @@ server.on('listening', () => {
   const address = server.address();
   console.log(`Server is now listening on port ${address.port}`);
 });
+module.exports = app;
