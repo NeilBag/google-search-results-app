@@ -4,7 +4,7 @@
   "description": "A web application that automates Google searches and sends results via email",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node backend/server.js",
     "dev": "nodemon server.js"
   },
   "dependencies": {
