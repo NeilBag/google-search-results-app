@@ -9,11 +9,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
 const emailConfig = {
   host: 'smtp.gmail.com',
   port: 587,
@@ -151,8 +146,26 @@ app.post('/api/email', async (req, res) => {
   }
 });
 
+// Server setup
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+}).on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.log(`Port ${PORT} is already in use. Trying another port...`);
+    setTimeout(() => {
+      server.close();
+      server.listen(0); // This will choose a random available port
+    }, 1000);
+  } else {
+    console.error('Server error:', err);
+  }
+});
+
+server.on('listening', () => {
+  const address = server.address();
+  console.log(`Server is now listening on port ${address.port}`);
 });
