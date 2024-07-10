@@ -4,12 +4,12 @@ const cheerio = require('cheerio');
 const nodemailer = require('nodemailer');
 const XLSX = require('xlsx');
 const cors = require('cors');
-const http = require('http');  // Add this line
-const path = require('path');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+const PORT = process.env.PORT || 3001;
 
 const emailConfig = {
   host: 'smtp.gmail.com',
@@ -116,6 +116,10 @@ async function sendEmail(results, recipientEmail, searchQuery) {
   await transporter.sendMail(mailOptions);
 }
 
+app.get('/', (req, res) => {
+  res.send('Server is up and running.');
+});
+
 app.post('/api/search', async (req, res) => {
   try {
     const { searchQuery } = req.body;
@@ -148,27 +152,6 @@ app.post('/api/email', async (req, res) => {
   }
 });
 
-// Server setup
-const PORT = process.env.PORT || 3000;
-
-const server = http.createServer(app);
-
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-}).on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.log(`Port ${PORT} is already in use. Trying another port...`);
-    setTimeout(() => {
-      server.close();
-      server.listen(0); // This will choose a random available port
-    }, 1000);
-  } else {
-    console.error('Server error:', err);
-  }
 });
-
-server.on('listening', () => {
-  const address = server.address();
-  console.log(`Server is now listening on port ${address.port}`);
-});
-module.exports = app;
