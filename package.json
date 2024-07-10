@@ -2,10 +2,10 @@
   "name": "automated-google-search-webapp",
   "version": "1.0.0",
   "description": "A web application that automates Google searches and sends results via email",
-  "main": "server.js",
+  "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon backend/server.js"
   },
   "dependencies": {
     "express": "^4.17.1",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/automated-google-search-webapp.git"
+    "url": "https://github.com/neilbag/automated-google-search-webapp.git"
   },
   "keywords": [
     "google",
